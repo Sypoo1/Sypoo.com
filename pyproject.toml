@@ -1,0 +1,22 @@
+[project]
+name = "Sypoo.com"
+version = "0.1.0"
+requires-python = ">=3.12"
+description = "Portfolio Site"
+readme = "README.md"
+
+dependencies = [
+    "alembic>=1.13.1",
+    "asyncpg>=0.29.0",
+    "fastapi>=0.111.0",
+    "gunicorn>=23.0.0",
+    "pydantic[email]>=2.7.1",
+    "pydantic-settings>=2.2.1",
+    "sqlalchemy[asyncio]>=2.0.30",
+    "uvicorn[standard]>=0.29.0",
+    "orjson>=3.10.11",
+]
+[tool.uv]
+dev-dependencies = [
+    "ruff",
+]
