@@ -23,3 +23,13 @@ export const getProjectById = async (projectId) => {
     throw error;
   }
 };
+
+export const addProject = async (projectData) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/projects`, projectData);
+    return response.data;
+  } catch (error) {
+    console.error('Ошибка при добавлении проекта:', error);
+    throw error;
+  }
+};
