@@ -15,7 +15,7 @@ function AddProjectForm() {
       if (user) {
         try {
           const profileData = await getUserProfile(localStorage.getItem('token'));
-          setIsAdmin(profileData.is_admin); // Предполагается, что поле is_admin возвращается из API
+          setIsAdmin(profileData.is_admin); 
         } catch (error) {
           console.error('Error fetching user profile:', error);
         }
