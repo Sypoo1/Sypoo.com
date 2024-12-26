@@ -19,6 +19,8 @@ class RunConfig(BaseModel):
 class ApiV1Prefix(BaseModel):
     prefix: str = "/v1"
     projects: str = "/projects"
+    users: str = "/users"
+    auth: str = "/auth"
 
 
 class ApiPrefix(BaseModel):
@@ -41,6 +43,9 @@ class DatabaseConfig(BaseModel):
         "pk": "pk_%(table_name)s",
     }
 
+
+# class AuthConfig(BaseModel):
+    
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
