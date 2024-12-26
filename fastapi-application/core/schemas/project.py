@@ -4,7 +4,7 @@ from pydantic import ConfigDict
 
 class ProjectBase(BaseModel):
     name: str
-    desctiption: str
+    description: str
     github_url: str
     contributors: int
 

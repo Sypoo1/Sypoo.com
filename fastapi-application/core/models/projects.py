@@ -7,7 +7,7 @@ from .mixins.int_id_pk import IntIdPkMixin
 
 
 class Project(IntIdPkMixin, Base):
-    Name: Mapped[str] = mapped_column(unique=True)
-    Disctiption: Mapped[str] = mapped_column(Text)
-    Github_Url: Mapped[str]
-    Contributors: Mapped[int]
+    name: Mapped[str] 
+    description: Mapped[str] = mapped_column(Text)
+    github_url: Mapped[str]
+    contributors: Mapped[int]

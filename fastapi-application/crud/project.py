@@ -23,5 +23,5 @@ async def create_project(
     project = Project(**project_create.model_dump())
     session.add(project)
     await session.commit()
-    # await session.refresh(user)
+    # await session.refresh(project)
     return project
