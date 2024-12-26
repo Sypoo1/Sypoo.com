@@ -10,4 +10,3 @@ class Project(IntIdPkMixin, Base):
     name: Mapped[str] 
     description: Mapped[str] = mapped_column(Text)
     github_url: Mapped[str]
-    contributors: Mapped[int]

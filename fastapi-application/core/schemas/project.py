@@ -6,7 +6,6 @@ class ProjectBase(BaseModel):
     name: str
     description: str
     github_url: str
-    contributors: int
 
 
 class ProjectCreate(ProjectBase):
