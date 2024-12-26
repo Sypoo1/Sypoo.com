@@ -8,6 +8,8 @@ class UserCreate(BaseModel):
 
 class UserResponse(BaseModel):
     username: str
+    is_active: bool
+    is_admin: bool
 
 
 class UserInDB(UserResponse):

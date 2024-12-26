@@ -12,6 +12,9 @@ function AuthModal({ isOpen, onClose }) {
     e.preventDefault();
     try {
       const userData = isLogin ? await login(username, password) : await register(username, password);
+      if (isLogin) {
+        userData.username = username;
+      }
       loginUser(userData);
       onClose();
     } catch (error) {

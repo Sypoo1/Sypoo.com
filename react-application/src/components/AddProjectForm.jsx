@@ -1,16 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { addProject } from '../api/project';
+import { UserContext } from '../context/UserContext';
+import { getUserProfile } from '../api/auth';
 
 function AddProjectForm() {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [githubUrl, setGithubUrl] = useState('');
+  const [isAdmin, setIsAdmin] = useState(false);
+  const { user } = useContext(UserContext);
+
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      if (user) {
+        try {
+          const profileData = await getUserProfile(localStorage.getItem('token'));
+          setIsAdmin(profileData.is_admin); // Предполагается, что поле is_admin возвращается из API
+        } catch (error) {
+          console.error('Error fetching user profile:', error);
+        }
+      }
+    };
+
+    fetchUserProfile();
+  }, [user]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await addProject({ name, description, github_url: githubUrl });
-      // Clear the form after successful submission
+      // Очистка формы после успешной отправки
       setName('');
       setDescription('');
       setGithubUrl('');
@@ -19,6 +38,15 @@ function AddProjectForm() {
       console.error('Error adding project:', error);
     }
   };
+
+  if (!isAdmin) {
+    return (
+      <div className="container mx-auto p-8 fade-in">
+        <h2 className="text-2xl font-bold mb-4 text-primary">Access Denied</h2>
+        <p>You do not have permission to add projects.</p>
+      </div>
+    );
+  }
 
   return (
     <form onSubmit={handleSubmit} className="container mx-auto p-8 fade-in">

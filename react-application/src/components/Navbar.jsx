@@ -5,7 +5,7 @@ import { UserContext } from '../context/UserContext';
 
 function Navbar() {
   const [isAuthModalOpen, setAuthModalOpen] = useState(false);
-  const { user } = useContext(UserContext);
+  const { user, logout } = useContext(UserContext);
 
   return (
     <nav className="bg-blue-600 p-4 shadow-md flex items-center justify-between">
@@ -19,7 +19,12 @@ function Navbar() {
       </div>
       <div className="mr-4">
         {user ? (
-          <span className="text-white font-bold">{user.username}</span>
+          <>
+            <span className="text-white font-bold">{user.username}</span>
+            <button onClick={logout} className="text-white font-bold hover:text-gray-200 transition duration-300 ml-4">
+              Logout
+            </button>
+          </>
         ) : (
           <button onClick={() => setAuthModalOpen(true)} className="text-white font-bold hover:text-gray-200 transition duration-300">
             Login/Register
