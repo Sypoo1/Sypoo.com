@@ -44,8 +44,11 @@ class DatabaseConfig(BaseModel):
     }
 
 
-# class AuthConfig(BaseModel):
-    
+class AuthCongif(BaseModel):
+    secret_key: str
+    algorithm: str
+    access_token_expires_minutes: int = 30
+
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
@@ -58,6 +61,6 @@ class Settings(BaseSettings):
     api: ApiPrefix = ApiPrefix()
     middleware: MiddlewareConfig = MiddlewareConfig()
     db: DatabaseConfig
-
+    auth: AuthCongif
 
 settings = Settings()

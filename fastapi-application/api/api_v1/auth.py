@@ -3,9 +3,9 @@ from typing import Annotated
 
 from fastapi.security import OAuth2PasswordRequestForm
 from fastapi import Depends, HTTPException, status, APIRouter
-from sqlalchemy.orm import Session
 
-from auth.auth_handler import authenticate_user, ACCESS_TOKEN_EXPIRE_MINUTES, create_access_token, get_user, get_password_hash
+from core.config import settings
+from auth.auth_handler import authenticate_user, create_access_token, get_user, get_password_hash
 
 from core.schemas.token import Token
 from core.schemas.user import UserCreate, UserResponse
@@ -72,7 +72,7 @@ async def login_for_access_token(
             detail="Incorrect username or password",
             headers={"WWW-Authenticate": "Bearer"},
         )
-    access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    access_token_expires = timedelta(minutes=settings.auth.access_token_expires_minutes)
     access_token = create_access_token(
         data={"sub": user.username}, expires_delta=access_token_expires
     )
