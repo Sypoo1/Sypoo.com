@@ -28,6 +28,20 @@ async def get_projects(
     projects = await project_crud.get_all_projects(session=session)
     return projects
 
+@router.get("/{project_id}", response_model=ProjectRead)
+async def get_project_by_id(
+    project_id: int,
+    session: Annotated[
+        AsyncSession,
+        Depends(db_helper.session_getter),
+    ],
+):
+    project = await project_crud.get_project_by_id(
+        session=session,
+        project_id=project_id,
+    )
+    return project
+
 
 @router.post("", response_model=ProjectRead)
 async def create_project(

@@ -15,6 +15,19 @@ async def get_all_projects(
     result = await session.scalars(stmt)
     return result.all()
 
+async def get_project_by_id(
+    session: AsyncSession,
+    project_id: int,
+) -> Project:
+    stmt = select(Project).where(Project.id == project_id)
+    result = await session.execute(stmt)
+    project = result.scalar_one_or_none()
+
+    if project is None:
+        raise ValueError(f"Project with id:{project_id} not found")
+
+    return project
+
 
 async def create_project(
     session: AsyncSession,
