@@ -5,6 +5,11 @@ from pydantic_settings import (
     SettingsConfigDict,
 )
 
+class MiddlewareConfig(BaseModel):
+    allow_origins: list[str] = ["http://localhost:5173"]
+    allow_credentials: bool = True
+    allow_methods: list[str] = ["*"]  
+    allow_headers: list[str] = ["*"] 
 
 class RunConfig(BaseModel):
     host: str = "0.0.0.0"
@@ -46,6 +51,7 @@ class Settings(BaseSettings):
     )
     run: RunConfig = RunConfig()
     api: ApiPrefix = ApiPrefix()
+    middleware: MiddlewareConfig = MiddlewareConfig()
     db: DatabaseConfig
 
 
